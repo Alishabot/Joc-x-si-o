@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc X și O</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Formular de înregistrare -->
+  <div id="register-modal" class="modal active">
+    <form id="register-form">
+      <h2>Înregistrare</h2>
+      <label>Nume jucător:
+        <input type="text" id="player-name" required minlength="3" maxlength="16">
+      </label>
+      <div class="choose-sign">
+        <span>Alege X sau O:</span>
+        <label><input type="radio" name="sign" value="X" checked> X</label>
+        <label><input type="radio" name="sign" value="O"> O</label>
+      </div>
+      <button type="submit">Continuă</button>
+      <div id="register-error" class="error"></div>
+    </form>
+  </div>
+
+  <!-- Meniu principal -->
+  <div id="main-menu" class="menu hidden">
+    <h1>Joc X și O</h1>
+    <button id="new-game-btn">Joc nou</button>
+    <div class="stats">
+      <div>X: <span id="x-wins">0</span></div>
+      <div>O: <span id="o-wins">0</span></div>
+      <div>Egaluri: <span id="draws">0</span></div>
+    </div>
+  </div>
+
+  <!-- Tabla de joc -->
+  <div id="game-board" class="board hidden">
+    <div class="board-grid">
+      <!-- Celulele vor fi generate dinamic -->
+    </div>
+    <button id="restart-btn">Restart</button>
+  </div>
+
+  <!-- Modal rezultat -->
+  <div id="result-modal" class="modal">
+    <div class="modal-content">
+      <h2 id="result-title"></h2>
+      <button id="result-ok">OK</button>
+    </div>
+  </div>
+
+  <!-- Modal restart -->
+  <div id="restart-modal" class="modal">
+    <div class="modal-content">
+      <h2>Sigur vrei să restartezi jocul?</h2>
+      <button id="restart-confirm">Da</button>
+      <button id="restart-cancel">Nu</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
