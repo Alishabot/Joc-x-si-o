@@ -58,7 +58,24 @@ body::before {
   border: 1px solid rgba(255, 107, 107, 0.3);
 }
 
-.menu, .board {
+.board {
+  background: rgba(22, 33, 62, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.1);
+  padding: 2rem;
+  margin: 1rem auto;
+  min-width: 320px;
+  max-width: 500px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.menu {
   background: rgba(22, 33, 62, 0.95);
   backdrop-filter: blur(15px);
   border-radius: 20px;
@@ -73,6 +90,9 @@ body::before {
   border: 1px solid rgba(255,255,255,0.1);
   position: relative;
   z-index: 1;
+}
+.menu.hidden, .board.hidden {
+  display: none;
 }
 .menu.hidden, .board.hidden {
   display: none;
@@ -96,6 +116,134 @@ body::before {
   content: 'O';
   color: #ff6b35;
   margin-left: 0.2rem;
+}
+
+/* Noul header pentru joc */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.logo-x {
+  color: #4a90e2;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+.logo-o {
+  color: #ff6b35;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+}
+
+.turn-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.turn-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a90e2;
+  text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+.turn-icon.O {
+  color: #ff6b35;
+  text-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
+}
+
+.turn-label {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.restart-icon {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.restart-icon:hover {
+  background: rgba(255,255,255,0.2);
+  transform: rotate(180deg);
+}
+
+/* Scoreboard nou */
+.scoreboard {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.score-item {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  min-width: 80px;
+  flex: 1;
+}
+
+.score-item span:first-child {
+  display: block;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.score-number {
+  display: block;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.player-score {
+  background: rgba(74, 144, 226, 0.2);
+  border-color: rgba(74, 144, 226, 0.3);
+}
+
+.ties-score {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.cpu-score {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: rgba(255, 107, 53, 0.3);
 }
 .game-info {
   display: flex;
@@ -479,11 +627,36 @@ button:hover {
   .cell {
     font-size: 2rem;
   }
-  .game-info {
+  .game-header {
     flex-direction: column;
     gap: 1rem;
   }
+  .scoreboard {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score-item span:first-child {
+    display: inline;
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
   .result-actions {
     flex-direction: column;
+  }
+  .logo-x, .logo-o {
+    font-size: 1.5rem;
+  }
+  .turn-display {
+    padding: 0.4rem 0.8rem;
+  }
+  .restart-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
 }

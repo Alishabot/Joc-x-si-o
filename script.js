@@ -28,11 +28,10 @@ const restartCancel = document.getElementById('restart-cancel');
 const xWins = document.getElementById('x-wins');
 const oWins = document.getElementById('o-wins');
 const draws = document.getElementById('draws');
-const playerSignDisplay = document.getElementById('player-sign');
-const cpuSignDisplay = document.getElementById('cpu-sign');
+const playerNameDisplay = document.getElementById('player-name-display');
+const turnIcon = document.getElementById('turn-icon');
 const playerScoreDisplay = document.getElementById('player-score');
 const cpuScoreDisplay = document.getElementById('cpu-score');
-const turnText = document.getElementById('turn-text');
 
 // --- Formular de înregistrare ---
 registerForm.addEventListener('submit', function(e) {
@@ -81,15 +80,21 @@ function renderBoard() {
 }
 
 function updateGameInfo() {
-  playerSignDisplay.textContent = playerSign;
-  cpuSignDisplay.textContent = cpuSign;
-  playerScoreDisplay.textContent = stats[playerSign];
-  cpuScoreDisplay.textContent = stats[cpuSign];
+  if (playerNameDisplay) {
+    playerNameDisplay.textContent = playerName.toUpperCase();
+  }
+  if (playerScoreDisplay) {
+    playerScoreDisplay.textContent = stats[playerSign];
+  }
+  if (cpuScoreDisplay) {
+    cpuScoreDisplay.textContent = stats[cpuSign];
+  }
 }
 
 function updateTurnIndicator() {
-  if (!gameActive) return;
-  turnText.textContent = currentTurn === playerSign ? 'Your turn' : 'CPU turn';
+  if (!gameActive || !turnIcon) return;
+  turnIcon.textContent = currentTurn;
+  turnIcon.className = 'turn-icon ' + currentTurn;
 }
 
 function handleCellClick(idx) {

@@ -42,25 +42,35 @@
 
   <!-- Tabla de joc -->
   <div id="game-board" class="board hidden">
-    <div class="game-info">
-      <div class="player-info">
-        <span class="player-label">You:</span>
-        <span id="player-sign" class="sign">X</span>
-        <span id="player-score" class="score">0</span>
+    <div class="game-header">
+      <div class="logo-section">
+        <span class="logo-x">X</span><span class="logo-o">O</span>
       </div>
-      <div class="turn-indicator">
-        <span id="turn-text">Your turn</span>
+      <div class="turn-display">
+        <span class="turn-icon" id="turn-icon">X</span>
+        <span class="turn-label">TURN</span>
       </div>
-      <div class="cpu-info">
-        <span class="player-label">CPU:</span>
-        <span id="cpu-sign" class="sign">O</span>
-        <span id="cpu-score" class="score">0</span>
-      </div>
+      <button id="restart-btn" class="restart-icon">↻</button>
     </div>
+    
     <div class="board-grid">
       <!-- Celulele vor fi generate dinamic -->
     </div>
-    <button id="restart-btn">Restart</button>
+    
+    <div class="scoreboard">
+      <div class="score-item player-score">
+        <span id="player-name-display">PLAYER</span>
+        <span id="player-score" class="score-number">0</span>
+      </div>
+      <div class="score-item ties-score">
+        <span>TIES</span>
+        <span id="draws" class="score-number">0</span>
+      </div>
+      <div class="score-item cpu-score">
+        <span>CPU</span>
+        <span id="cpu-score" class="score-number">0</span>
+      </div>
+    </div>
   </div>
 
   <!-- Modal rezultat -->
