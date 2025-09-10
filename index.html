@@ -9,29 +9,31 @@
 <body>
   <!-- Formular de înregistrare -->
   <div id="register-modal" class="modal active">
-    <form id="register-form">
-      <h2>Înregistrare</h2>
-      <label>Nume jucător:
-        <input type="text" id="player-name" required minlength="3" maxlength="16">
-      </label>
-      <div class="choose-sign">
-        <span>Alege X sau O:</span>
-        <label><input type="radio" name="sign" value="X" checked> X</label>
-        <label><input type="radio" name="sign" value="O"> O</label>
-      </div>
-      <button type="submit">Continuă</button>
-      <div id="register-error" class="error"></div>
-    </form>
+    <div class="modal-content">
+      <form id="register-form">
+        <h2>Let us know more about you</h2>
+        <label>Name
+          <input type="text" id="player-name" required minlength="3" maxlength="16" placeholder="Enter your name">
+        </label>
+        <div class="choose-sign">
+          <span>Choose:</span>
+          <label><input type="radio" name="sign" value="X" checked> X</label>
+          <label><input type="radio" name="sign" value="O"> O</label>
+        </div>
+        <button type="submit">Let's Start</button>
+        <div id="register-error" class="error"></div>
+      </form>
+    </div>
   </div>
 
   <!-- Meniu principal -->
   <div id="main-menu" class="menu hidden">
-    <h1>Joc X și O</h1>
-    <button id="new-game-btn">Joc nou</button>
+    <h1>Game</h1>
+    <button id="new-game-btn">New Game</button>
     <div class="stats">
       <div>X: <span id="x-wins">0</span></div>
       <div>O: <span id="o-wins">0</span></div>
-      <div>Egaluri: <span id="draws">0</span></div>
+      <div>Draws: <span id="draws">0</span></div>
     </div>
   </div>
 
@@ -39,12 +41,12 @@
   <div id="game-board" class="board hidden">
     <div class="game-info">
       <div class="player-info">
-        <span class="player-label">Tu:</span>
+        <span class="player-label">You:</span>
         <span id="player-sign" class="sign">X</span>
         <span id="player-score" class="score">0</span>
       </div>
       <div class="turn-indicator">
-        <span id="turn-text">Tura ta</span>
+        <span id="turn-text">Your turn</span>
       </div>
       <div class="cpu-info">
         <span class="player-label">CPU:</span>
@@ -65,8 +67,8 @@
       <h2 id="result-title"></h2>
       <p id="result-message"></p>
       <div class="result-actions">
-        <button id="result-new-game" class="btn-primary">Joc nou</button>
-        <button id="result-quit" class="btn-secondary">Înapoi la meniu</button>
+        <button id="result-new-game" class="btn-primary">New Game</button>
+        <button id="result-quit" class="btn-secondary">Back to Menu</button>
       </div>
     </div>
   </div>
@@ -74,9 +76,11 @@
   <!-- Modal restart -->
   <div id="restart-modal" class="modal">
     <div class="modal-content">
-      <h2>Sigur vrei să restartezi jocul?</h2>
-      <button id="restart-confirm">Da</button>
-      <button id="restart-cancel">Nu</button>
+      <h2>Are you sure you want to restart?</h2>
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        <button id="restart-confirm" class="btn-primary">Yes</button>
+        <button id="restart-cancel" class="btn-secondary">No</button>
+      </div>
     </div>
   </div>
 

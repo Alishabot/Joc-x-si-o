@@ -40,7 +40,7 @@ registerForm.addEventListener('submit', function(e) {
   const name = document.getElementById('player-name').value.trim();
   const sign = registerForm.sign.value;
   if (name.length < 3 || name.length > 16) {
-    registerError.textContent = 'Numele trebuie să aibă între 3 și 16 caractere.';
+    registerError.textContent = 'Name must be between 3 and 16 characters.';
     return;
   }
   playerName = name;
@@ -89,7 +89,7 @@ function updateGameInfo() {
 
 function updateTurnIndicator() {
   if (!gameActive) return;
-  turnText.textContent = currentTurn === playerSign ? 'Tura ta' : 'Tura CPU';
+  turnText.textContent = currentTurn === playerSign ? 'Your turn' : 'CPU turn';
 }
 
 function handleCellClick(idx) {
@@ -127,9 +127,9 @@ function checkGameOver() {
       const winner = board[a];
       const isPlayerWin = winner === playerSign;
       showResult(
-        isPlayerWin ? 'Felicitări!' : 'Ai pierdut!',
+        isPlayerWin ? 'Congratulations!' : 'You Lost!',
         isPlayerWin ? '🎉' : '😔',
-        isPlayerWin ? 'Ai câștigat această rundă!' : 'CPU-ul a câștigat această rundă.'
+        isPlayerWin ? 'You won this round!' : 'CPU won this round.'
       );
       stats[winner]++;
       updateStats();
@@ -139,7 +139,7 @@ function checkGameOver() {
   }
   if (board.every(cell => cell)) {
     gameActive = false;
-    showResult('Egal!', '🤝', 'Nimeni nu a câștigat această rundă.');
+    showResult('Draw!', '🤝', 'Nobody won this round.');
     stats.draws++;
     updateStats();
     return true;
