@@ -18,13 +18,21 @@ const boardGrid = document.querySelector('.board-grid');
 const restartBtn = document.getElementById('restart-btn');
 const resultModal = document.getElementById('result-modal');
 const resultTitle = document.getElementById('result-title');
-const resultOk = document.getElementById('result-ok');
+const resultIcon = document.getElementById('result-icon');
+const resultMessage = document.getElementById('result-message');
+const resultNewGame = document.getElementById('result-new-game');
+const resultQuit = document.getElementById('result-quit');
 const restartModal = document.getElementById('restart-modal');
 const restartConfirm = document.getElementById('restart-confirm');
 const restartCancel = document.getElementById('restart-cancel');
 const xWins = document.getElementById('x-wins');
 const oWins = document.getElementById('o-wins');
 const draws = document.getElementById('draws');
+const playerSignDisplay = document.getElementById('player-sign');
+const cpuSignDisplay = document.getElementById('cpu-sign');
+const playerScoreDisplay = document.getElementById('player-score');
+const cpuScoreDisplay = document.getElementById('cpu-score');
+const turnText = document.getElementById('turn-text');
 
 // --- Formular de înregistrare ---
 registerForm.addEventListener('submit', function(e) {
@@ -51,9 +59,13 @@ function startNewGame() {
   boardDiv.classList.remove('hidden');
   resetBoard();
   renderBoard();
+  updateGameInfo();
   gameActive = true;
   currentTurn = 'X';
-  if (playerSign !== 'X') cpuMove();
+  updateTurnIndicator();
+  if (playerSign !== 'X') {
+    setTimeout(cpuMove, 500);
+  }
 }
 
 // --- Tabla de joc ---
@@ -61,11 +73,23 @@ function renderBoard() {
   boardGrid.innerHTML = '';
   board.forEach((cell, idx) => {
     const div = document.createElement('div');
-    div.className = 'cell' + (cell ? ' filled' : '');
+    div.className = 'cell' + (cell ? ' filled ' + cell : '');
     div.textContent = cell;
     div.addEventListener('click', () => handleCellClick(idx));
     boardGrid.appendChild(div);
   });
+}
+
+function updateGameInfo() {
+  playerSignDisplay.textContent = playerSign;
+  cpuSignDisplay.textContent = cpuSign;
+  playerScoreDisplay.textContent = stats[playerSign];
+  cpuScoreDisplay.textContent = stats[cpuSign];
+}
+
+function updateTurnIndicator() {
+  if (!gameActive) return;
+  turnText.textContent = currentTurn === playerSign ? 'Tura ta' : 'Tura CPU';
 }
 
 function handleCellClick(idx) {
@@ -74,7 +98,8 @@ function handleCellClick(idx) {
   renderBoard();
   if (checkGameOver()) return;
   currentTurn = cpuSign;
-  setTimeout(cpuMove, 400);
+  updateTurnIndicator();
+  setTimeout(cpuMove, 600);
 }
 
 function cpuMove() {
@@ -87,6 +112,7 @@ function cpuMove() {
   renderBoard();
   if (checkGameOver()) return;
   currentTurn = playerSign;
+  updateTurnIndicator();
 }
 
 function checkGameOver() {
@@ -98,15 +124,22 @@ function checkGameOver() {
   for (const [a,b,c] of winPatterns) {
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
       gameActive = false;
-      showResult(board[a] === playerSign ? 'Ai câștigat!' : 'Ai pierdut!');
-      stats[board[a]]++;
+      const winner = board[a];
+      const isPlayerWin = winner === playerSign;
+      showResult(
+        isPlayerWin ? 'Felicitări!' : 'Ai pierdut!',
+        isPlayerWin ? '🎉' : '😔',
+        isPlayerWin ? 'Ai câștigat această rundă!' : 'CPU-ul a câștigat această rundă.'
+      );
+      stats[winner]++;
       updateStats();
+      updateGameInfo();
       return true;
     }
   }
   if (board.every(cell => cell)) {
     gameActive = false;
-    showResult('Egal!');
+    showResult('Egal!', '🤝', 'Nimeni nu a câștigat această rundă.');
     stats.draws++;
     updateStats();
     return true;
@@ -121,11 +154,25 @@ function resetBoard() {
 }
 
 // --- Modale ---
-function showResult(msg) {
-  resultTitle.textContent = msg;
+function showResult(title, icon, message) {
+  resultTitle.textContent = title;
+  resultIcon.textContent = icon;
+  resultMessage.textContent = message;
   resultModal.classList.add('active');
 }
-resultOk.addEventListener('click', () => {
+resultNewGame.addEventListener('click', () => {
+  resultModal.classList.remove('active');
+  resetBoard();
+  renderBoard();
+  updateGameInfo();
+  gameActive = true;
+  currentTurn = 'X';
+  updateTurnIndicator();
+  if (playerSign !== 'X') {
+    setTimeout(cpuMove, 500);
+  }
+});
+resultQuit.addEventListener('click', () => {
   resultModal.classList.remove('active');
   boardDiv.classList.add('hidden');
   mainMenu.classList.remove('hidden');
@@ -138,7 +185,13 @@ restartConfirm.addEventListener('click', () => {
   restartModal.classList.remove('active');
   resetBoard();
   renderBoard();
-  if (playerSign !== 'X') cpuMove();
+  updateGameInfo();
+  gameActive = true;
+  currentTurn = 'X';
+  updateTurnIndicator();
+  if (playerSign !== 'X') {
+    setTimeout(cpuMove, 500);
+  }
 });
 restartCancel.addEventListener('click', () => {
   restartModal.classList.remove('active');
