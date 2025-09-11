@@ -15,6 +15,7 @@ const registerError = document.getElementById('register-error');
 const symbolConfirm = document.getElementById('symbol-confirm');
 const mainMenu = document.getElementById('main-menu');
 const newGameBtn = document.getElementById('new-game-btn');
+const newGameQuick = document.getElementById('new-game-quick');
 const boardDiv = document.getElementById('game-board');
 const boardGrid = document.querySelector('.board-grid');
 const restartBtn = document.getElementById('restart-btn');
@@ -60,6 +61,7 @@ symbolConfirm.addEventListener('click', function() {
 
 // --- Meniu principal ---
 newGameBtn.addEventListener('click', startNewGame);
+newGameQuick.addEventListener('click', startNewGame);
 
 function startNewGame() {
   mainMenu.classList.add('hidden');
