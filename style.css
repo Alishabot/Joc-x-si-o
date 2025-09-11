@@ -613,17 +613,19 @@ button:hover {
 .modal-content {
   background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
   border-radius: 20px;
-  padding: 3rem 2.5rem;
+  padding: 2rem 1.5rem;
   box-shadow: 
     0 10px 30px rgba(0,0,0,0.3),
     0 0 0 1px rgba(255,255,255,0.1);
   text-align: center;
   max-width: 90vw;
-  min-width: 400px;
+  max-height: 90vh;
+  min-width: 300px;
   position: relative;
   z-index: 1001;
   transform: scale(0.9);
   transition: transform 0.3s ease;
+  overflow-y: auto;
 }
 
 .modal.active .modal-content {
@@ -789,17 +791,24 @@ button:hover {
 }
 .result-content {
   min-width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
 }
+
 .result-icon {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 .result-actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1002;
 }
 
 .btn-primary {
@@ -808,6 +817,14 @@ button:hover {
   border: none;
   padding: 12px 24px;
   border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1003;
+  min-height: 48px;
+}
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -832,6 +849,9 @@ button:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1003;
+  min-height: 48px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   min-width: 120px;
