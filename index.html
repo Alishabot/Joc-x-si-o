@@ -11,24 +11,44 @@
 </head>
 <body>
   <!-- Forme geometrice de fundal -->
-  <div class="geometric-shapes"></div>
+  <div class="geometric-shapes">
+    <div class="bg-x-1">✕</div>
+    <div class="bg-o-1">○</div>
+    <div class="bg-x-2">✕</div>
+    <div class="bg-o-2">○</div>
+  </div>
   
-  <!-- Formular de înregistrare -->
+  <!-- Formular de înregistrare - Nume -->
   <div id="register-modal" class="modal active">
+    <div class="modal-overlay"></div>
     <div class="modal-content">
       <form id="register-form">
         <h2>Let us know more about you</h2>
         <label>Name
           <input type="text" id="player-name" required minlength="3" maxlength="16" placeholder="Enter your name">
         </label>
-        <div class="choose-sign">
-          <span>Choose:</span>
-          <label><input type="radio" name="sign" value="X" checked> X</label>
-          <label><input type="radio" name="sign" value="O"> O</label>
-        </div>
-        <button type="submit">Let's Start</button>
+        <button type="submit">Continue</button>
         <div id="register-error" class="error"></div>
       </form>
+    </div>
+  </div>
+
+  <!-- Formular alegere simbol -->
+  <div id="symbol-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2>Choose your symbol</h2>
+      <div class="choose-sign">
+        <label class="symbol-option">
+          <input type="radio" name="sign" value="X" checked>
+          <span class="symbol-display">X</span>
+        </label>
+        <label class="symbol-option">
+          <input type="radio" name="sign" value="O">
+          <span class="symbol-display">O</span>
+        </label>
+      </div>
+      <button id="symbol-confirm">Let's Start</button>
     </div>
   </div>
 
@@ -76,8 +96,10 @@
     </div>
   </div>
 
+  <!-- Modale - direct children of body -->
   <!-- Modal rezultat -->
   <div id="result-modal" class="modal">
+    <div class="modal-overlay"></div>
     <div class="modal-content result-content">
       <div class="result-icon" id="result-icon">🎉</div>
       <h2 id="result-title"></h2>
@@ -91,6 +113,7 @@
 
   <!-- Modal restart -->
   <div id="restart-modal" class="modal">
+    <div class="modal-overlay"></div>
     <div class="modal-content">
       <h2>Are you sure you want to restart?</h2>
       <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">

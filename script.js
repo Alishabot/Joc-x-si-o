@@ -9,8 +9,10 @@ let stats = { X: 0, O: 0, draws: 0 };
 
 // --- Elemente DOM ---
 const registerModal = document.getElementById('register-modal');
+const symbolModal = document.getElementById('symbol-modal');
 const registerForm = document.getElementById('register-form');
 const registerError = document.getElementById('register-error');
+const symbolConfirm = document.getElementById('symbol-confirm');
 const mainMenu = document.getElementById('main-menu');
 const newGameBtn = document.getElementById('new-game-btn');
 const boardDiv = document.getElementById('game-board');
@@ -37,15 +39,21 @@ const cpuScoreDisplay = document.getElementById('cpu-score');
 registerForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const name = document.getElementById('player-name').value.trim();
-  const sign = registerForm.sign.value;
   if (name.length < 3 || name.length > 16) {
     registerError.textContent = 'Name must be between 3 and 16 characters.';
     return;
   }
   playerName = name;
-  playerSign = sign;
-  cpuSign = sign === 'X' ? 'O' : 'X';
   registerModal.classList.remove('active');
+  symbolModal.classList.add('active');
+});
+
+// --- Formular alegere simbol ---
+symbolConfirm.addEventListener('click', function() {
+  const selectedSign = document.querySelector('input[name="sign"]:checked').value;
+  playerSign = selectedSign;
+  cpuSign = selectedSign === 'X' ? 'O' : 'X';
+  symbolModal.classList.remove('active');
   mainMenu.classList.remove('hidden');
   updateStats();
 });
@@ -88,6 +96,11 @@ function updateGameInfo() {
   }
   if (cpuScoreDisplay) {
     cpuScoreDisplay.textContent = stats[cpuSign];
+  }
+  // Actualizează și draws în scoreboard-ul de jos
+  const drawsElement = document.getElementById('draws');
+  if (drawsElement) {
+    drawsElement.textContent = stats.draws;
   }
 }
 
