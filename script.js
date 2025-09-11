@@ -113,7 +113,11 @@ function updateTurnIndicator() {
 }
 
 function handleCellClick(idx) {
-  if (!gameActive || board[idx] || currentTurn !== playerSign) return;
+  console.log('Cell clicked:', idx, 'gameActive:', gameActive, 'board[idx]:', board[idx], 'currentTurn:', currentTurn, 'playerSign:', playerSign);
+  if (!gameActive || board[idx] || currentTurn !== playerSign) {
+    console.log('Click ignored - gameActive:', gameActive, 'cell occupied:', !!board[idx], 'not player turn:', currentTurn !== playerSign);
+    return;
+  }
   board[idx] = playerSign;
   renderBoard();
   if (checkGameOver()) return;
@@ -202,6 +206,7 @@ restartBtn.addEventListener('click', () => {
   restartModal.classList.add('active');
 });
 restartConfirm.addEventListener('click', () => {
+  console.log('Restart confirmed - starting fresh game');
   restartModal.classList.remove('active');
   resetBoard();
   renderBoard();
@@ -209,8 +214,12 @@ restartConfirm.addEventListener('click', () => {
   gameActive = true;
   currentTurn = 'X';
   updateTurnIndicator();
+  console.log('Game restarted - playerSign:', playerSign, 'currentTurn:', currentTurn, 'gameActive:', gameActive);
   if (playerSign !== 'X') {
+    console.log('Player is O, CPU will move first');
     setTimeout(cpuMove, 500);
+  } else {
+    console.log('Player is X, waiting for player move');
   }
 });
 restartCancel.addEventListener('click', () => {
