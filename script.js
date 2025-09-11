@@ -185,6 +185,7 @@ function showResult(title, icon, message) {
   resultModal.classList.add('active');
 }
 resultNewGame.addEventListener('click', () => {
+  console.log('New Game clicked from result modal');
   resultModal.classList.remove('active');
   resetBoard();
   renderBoard();
@@ -197,6 +198,7 @@ resultNewGame.addEventListener('click', () => {
   }
 });
 resultQuit.addEventListener('click', () => {
+  console.log('Back to Menu clicked');
   resultModal.classList.remove('active');
   boardDiv.classList.add('hidden');
   mainMenu.classList.remove('hidden');
@@ -236,4 +238,34 @@ function updateStats() {
 // --- Inițializare ---
 window.addEventListener('DOMContentLoaded', () => {
   renderBoard();
+  
+  // Închide modalele prin click pe overlay
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', () => {
+      const modal = overlay.parentElement;
+      if (modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        // Dacă este modalul de rezultat, întoarce-te la meniu
+        if (modal.id === 'result-modal') {
+          boardDiv.classList.add('hidden');
+          mainMenu.classList.remove('hidden');
+        }
+      }
+    });
+  });
+  
+  // Închide modalele cu tasta Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const activeModal = document.querySelector('.modal.active');
+      if (activeModal) {
+        activeModal.classList.remove('active');
+        // Dacă este modalul de rezultat, întoarce-te la meniu
+        if (activeModal.id === 'result-modal') {
+          boardDiv.classList.add('hidden');
+          mainMenu.classList.remove('hidden');
+        }
+      }
+    }
+  });
 });
